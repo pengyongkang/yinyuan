@@ -576,6 +576,48 @@ border-radius:22px;
 
 }
 
+/* 复制提示 */
+.toast{
+
+position:fixed;
+
+left:50%;
+
+bottom:35px;
+
+transform:translateX(-50%) translateY(20px);
+
+padding:12px 20px;
+
+border-radius:999px;
+
+background:rgba(15,23,42,.92);
+
+color:white;
+
+font-size:14px;
+
+font-weight:700;
+
+opacity:0;
+
+pointer-events:none;
+
+transition:.25s ease;
+
+z-index:99999;
+
+}
+
+.toast.show{
+
+opacity:1;
+
+transform:translateX(-50%) translateY(0);
+
+}
+
+
 
 
 @media(max-width:700px){
@@ -709,6 +751,11 @@ placeholder="搜索 JS 文件..."
 </div>
 
 
+<div id="toast" class="toast">
+复制成功
+</div>
+
+
 
 
 <script>
@@ -790,6 +837,13 @@ const statusEl=
 document.getElementById("status");
 
 
+const toastEl=
+document.getElementById("toast");
+
+
+let toastTimer=null;
+
+
 
 let files=[];
 
@@ -812,7 +866,32 @@ async function copy(text){
 await navigator.clipboard.writeText(text);
 
 
-alert("已复制");
+showToast("复制成功");
+
+}
+
+
+function showToast(message){
+
+
+toastEl.textContent=message;
+
+
+toastEl.classList.add("show");
+
+
+clearTimeout(toastTimer);
+
+
+toastTimer=setTimeout(
+()=>{
+
+
+toastEl.classList.remove("show");
+
+},
+1600
+);
 
 }
 
@@ -994,5 +1073,6 @@ searchEl.oninput=filter;
 </script>
 
 
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>

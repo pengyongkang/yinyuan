@@ -1,8 +1,8 @@
 /*!
- * @name 聆澜音源(赞助版)[永久]
+ * @name 彭友科技(会员版)[永久]
  * @description 支持所有平台全音质
  * @version v7
- * @author 时迁酱&guoyue2010
+ * @author pengyoukeji
  */
 const DEV_ENABLE = false;
 const UPDATE_ENABLE = true;
